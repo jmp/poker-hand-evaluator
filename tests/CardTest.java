@@ -70,7 +70,9 @@ class CardTest {
 
     @Test
     void testInvalidFromString() {
-        assertThrows(IllegalArgumentException.class, () -> Card.fromString("Xy"));
+        assertThrows(IllegalArgumentException.class, () -> Card.fromString("Kx"));
+        assertThrows(IllegalArgumentException.class, () -> Card.fromString("Xd"));
+        assertThrows(IllegalArgumentException.class, () -> Card.fromString("Xx"));
     }
 
     @Test
