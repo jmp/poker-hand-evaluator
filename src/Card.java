@@ -126,7 +126,7 @@ public class Card {
      * @param rank rank to check.
      * @return true if the rank is valid, false otherwise.
      */
-    private boolean isValidRank(int rank) {
+    private static boolean isValidRank(int rank) {
         return rank >= DEUCE && rank <= ACE;
     }
 
@@ -135,7 +135,7 @@ public class Card {
      * @param suit suit to check.
      * @return true if the suit is valid, false otherwise.
      */
-    private boolean isValidSuit(int suit) {
+    private static boolean isValidSuit(int suit) {
         return suit == CLUBS || suit == DIAMONDS || suit == HEARTS || suit == SPADES;
     }
 }
