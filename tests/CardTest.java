@@ -59,20 +59,30 @@ class CardTest {
     }
 
     @Test
-    void testTooShortFromString() {
+    void testFromStringInvalid() {
+        assertThrows(IllegalArgumentException.class, () -> Card.fromString("Kx"));
+        assertThrows(IllegalArgumentException.class, () -> Card.fromString("Xd"));
+        assertThrows(IllegalArgumentException.class, () -> Card.fromString("Xx"));
+    }
+
+    @Test
+    void testFromStringNull() {
+        assertThrows(IllegalArgumentException.class, () -> Card.fromString(null));
+    }
+
+    @Test
+    void testFromStringEmpty() {
+        assertThrows(IllegalArgumentException.class, () -> Card.fromString(""));
+    }
+
+    @Test
+    void testFromStringTooShort() {
         assertThrows(IllegalArgumentException.class, () -> Card.fromString("K"));
     }
 
     @Test
-    void testTooLongFromString() {
+    void testFromStringTooLong() {
         assertThrows(IllegalArgumentException.class, () -> Card.fromString("Kd Qs"));
-    }
-
-    @Test
-    void testInvalidFromString() {
-        assertThrows(IllegalArgumentException.class, () -> Card.fromString("Kx"));
-        assertThrows(IllegalArgumentException.class, () -> Card.fromString("Xd"));
-        assertThrows(IllegalArgumentException.class, () -> Card.fromString("Xx"));
     }
 
     @Test

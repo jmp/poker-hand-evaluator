@@ -55,8 +55,8 @@ public class Card {
      * @return a new {@link Card} instance corresponding to the given string.
      */
     public static Card fromString(String string) {
-        if (string.length() != 2) {
-            throw new IllegalArgumentException("Card string length must be exactly 2.");
+        if (string == null || string.length() != 2) {
+            throw new IllegalArgumentException("Card string must be non-null with length of exactly 2.");
         }
 
         final int rank = RANKS.indexOf(string.charAt(0));
