@@ -35,11 +35,11 @@ public class Card {
      * @param suit the suit of the card, e.g. {@link Card#CLUBS}
      */
     public Card(int rank, int suit) {
-        if (isValidRank(rank)) {
+        if (!isValidRank(rank)) {
             throw new IllegalArgumentException("Invalid rank.");
         }
 
-        if (isValidSuit(suit)) {
+        if (!isValidSuit(suit)) {
             throw new IllegalArgumentException("Invalid suit.");
         }
 
@@ -127,7 +127,7 @@ public class Card {
      * @return true if the rank is valid, false otherwise.
      */
     private boolean isValidRank(int rank) {
-        return rank < DEUCE || rank > ACE;
+        return rank >= DEUCE && rank <= ACE;
     }
 
     /**
@@ -136,6 +136,6 @@ public class Card {
      * @return true if the suit is valid, false otherwise.
      */
     private boolean isValidSuit(int suit) {
-        return suit != CLUBS && suit != DIAMONDS && suit != HEARTS && suit != SPADES;
+        return suit == CLUBS || suit == DIAMONDS || suit == HEARTS || suit == SPADES;
     }
 }
