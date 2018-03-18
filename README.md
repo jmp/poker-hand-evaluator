@@ -54,5 +54,5 @@ The `fromString` method can be used to create a hand from a string:
 
 ## Credits
 
-The evaluator implements Kevin Suffecool's 5-hand card evaluator,
+The evaluator implements Kevin Suffecool's 5-card hand evaluator,
 with the perfect hash optimization by Paul Senzee.
