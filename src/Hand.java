@@ -10,7 +10,8 @@ public abstract class Hand {
     }
 
     /**
-     * Poker hand evaluator based on Kevin Suffecool's 5-card hand evaluator and with Paul Senzee's pre-computed hash.
+     * Evaluates the given hand and returns its value as an integer.
+     * Based on Kevin Suffecool's 5-card hand evaluator and with Paul Senzee's pre-computed hash.
      * @param cards a hand of cards to evaluate
      * @return the value of the hand as an integer between 1 and 7462
      */
@@ -55,6 +56,7 @@ public abstract class Hand {
      * Creates a new 5-card hand from the given string.
      * @param string the string to create the hand from, such as "Kd 5s Jc Ah Qc"
      * @return a new hand as an array of cards
+     * @see Card
      */
     public static Card[] fromString(String string) {
         final String[] parts = string.split(" ");

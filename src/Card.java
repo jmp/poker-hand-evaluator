@@ -29,6 +29,11 @@ public class Card {
     private static final String RANKS = "23456789TJQKA";
     private static final String SUITS = "shdc";
 
+    /**
+     * Creates a new card with the given rank and suit.
+     * @param rank the rank of the card, e.g. {@link Card#SIX}
+     * @param suit the suit of the card, e.g. {@link Card#CLUBS}
+     */
     public Card(int rank, int suit) {
         if (rank < DEUCE || rank > ACE) {
             throw new IllegalArgumentException("Invalid rank.");
@@ -41,6 +46,14 @@ public class Card {
         value = (1 << (rank + 16)) | suit | (rank << 8) | Tables.PRIMES[rank];
     }
 
+    /**
+     * Create a new {@link Card} instance from the given string.
+     * The string should be a two-character string where the first character
+     * is the rank and the second character is the suit. For example, "Kc" means
+     * the king of clubs, and "As" means the ace of spades.
+     * @param string Card to create as a string.
+     * @return a new {@link Card} instance corresponding to the given string.
+     */
     public static Card fromString(String string) {
         if (string.length() != 2) {
             throw new IllegalArgumentException("Card string length must be exactly 2.");
@@ -52,21 +65,59 @@ public class Card {
         return new Card(rank, suit);
     }
 
+    /**
+     * Returns the rank of the card.
+     * @return rank of the card as an integer.
+     * @see Card#ACE
+     * @see Card#DEUCE
+     * @see Card#TREY
+     * @see Card#FOUR
+     * @see Card#FIVE
+     * @see Card#SIX
+     * @see Card#SEVEN
+     * @see Card#EIGHT
+     * @see Card#NINE
+     * @see Card#TEN
+     * @see Card#JACK
+     * @see Card#QUEEN
+     * @see Card#KING
+     */
     public int getRank() {
         return (value >> 8) & 0xF;
     }
 
+    /**
+     * Returns the suit of the card.
+     * @return Suit of the card as an integer.
+     * @see Card#SPADES
+     * @see Card#HEARTS
+     * @see Card#DIAMONDS
+     * @see Card#CLUBS
+     */
     public int getSuit() {
         return value & 0xF000;
     }
 
-    public int getValue() {
-        return value;
-    }
-
+    /**
+     * Returns a string representation of the card.
+     * For example, the king of spades is "Ks", and the jack of hearts is "Jh".
+     * @return a string representation of the card.
+     */
     public String toString() {
         char rank = RANKS.charAt(getRank());
         char suit = SUITS.charAt((int) (Math.log(getSuit()) / Math.log(2)) - 12);
         return "" + rank + suit;
+    }
+
+    /**
+     * Returns the value of the card as an integer.
+     * The value is represented as the bits <code>xxxAKQJT 98765432 CDHSrrrr xxPPPPPP</code>,
+     * where <code>x</code> means unused, <code>AKQJT 98765432</code> are bits turned on/off
+     * depending on the rank of the card, <code>CDHS</code> are the bits corresponding to the
+     * suit, and <code>PPPPPP</code> is the prime number of the card.
+     * @return the value of the card.
+     */
+    int getValue() {
+        return value;
     }
 }
