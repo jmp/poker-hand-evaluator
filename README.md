@@ -9,6 +9,8 @@ a small project of mine, written for my own recreational purposes.
 
 ## How to use
 
+Documentation: https://jmp.github.io/poker-hand-evaluator/
+
 There are a couple of useful classes: `Card` and `Hand`.
 
 ## `Card` class
