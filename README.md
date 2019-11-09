@@ -56,7 +56,7 @@ int value = Hand.evaluate(hand);
 ```
 
 The `evaluate` method returns the value of a hand as an integer
-between 1 and 7462. The higher the value, the more valuable the hand.
+between 1 and 7462. The lower the value, the more valuable the hand.
 
 The `fromString` method can be used to create a hand from a string:
 
