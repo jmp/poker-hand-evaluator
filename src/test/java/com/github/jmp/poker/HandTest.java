@@ -8,6 +8,7 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -98,12 +99,12 @@ class HandTest {
         final int expectedHandCount = 2598960;
 
         int count = 0;
-        Path path = Paths.get(getClass().getClassLoader().getResource("HandTestValues.txt").toURI());
+        Path path = Paths.get(Objects.requireNonNull(getClass().getClassLoader().getResource("HandTestValues.txt")).toURI());
         try (BufferedReader reader = Files.newBufferedReader(path)) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String cardsString = line.substring(0, line.lastIndexOf(" "));
-                String valueString = line.substring(line.lastIndexOf(" ") + 1, line.length());
+                String valueString = line.substring(line.lastIndexOf(" ") + 1);
 
                 Card[] cards = Hand.fromString(cardsString);
                 int expectedValue = Integer.parseInt(valueString);
