@@ -1,3 +1,5 @@
+package com.github.jmp.poker;
+
 /**
  * An immutable class representing a card from a normal 52-card deck.
  */

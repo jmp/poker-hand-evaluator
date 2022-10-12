@@ -1,3 +1,5 @@
+package com.github.jmp.poker;
+
 import org.junit.jupiter.api.Test;
 
 import java.io.BufferedReader;
@@ -96,7 +98,7 @@ class HandTest {
         final int expectedHandCount = 2598960;
 
         int count = 0;
-        Path path = Paths.get(getClass().getResource("HandTestValues.txt").toURI());
+        Path path = Paths.get(getClass().getClassLoader().getResource("HandTestValues.txt").toURI());
         try (BufferedReader reader = Files.newBufferedReader(path)) {
             String line;
             while ((line = reader.readLine()) != null) {

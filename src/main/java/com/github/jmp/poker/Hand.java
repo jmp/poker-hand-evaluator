@@ -1,3 +1,5 @@
+package com.github.jmp.poker;
+
 import java.util.Arrays;
 
 /** Utility methods for evaluating or creating a hand of cards. */
