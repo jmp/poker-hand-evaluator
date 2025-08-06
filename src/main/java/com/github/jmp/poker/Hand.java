@@ -3,26 +3,38 @@ package com.github.jmp.poker;
 import java.util.Arrays;
 
 /** Utility methods for evaluating or creating a hand of cards. */
-public abstract class Hand {
-    /**
-     * Private constructor to disable instantiation of an abstract class.
-     */
-    private Hand() {
-
-    }
+public class Hand {
+    private final Card[] cards;
 
     /**
-     * Evaluates the given hand and returns its value as an integer.
-     * Based on Kevin Suffecool's 5-card hand evaluator and with Paul Senzee's pre-computed hash.
-     * @param cards a hand of cards to evaluate
-     * @return the value of the hand as an integer between 1 and 7462
+     * Constructs a new Hand with exactly 5 cards.
+     *
+     * @param cards the cards to include in this hand (must be exactly 5 cards)
+     * @throws IllegalArgumentException if cards is null or does not contain exactly 5 cards
      */
-    public static int evaluate(Card[] cards) {
-        // Only 5-card hands are supported
+    Hand(Card ...cards) {
         if (cards == null || cards.length != 5) {
             throw new IllegalArgumentException("Exactly 5 cards are required.");
         }
 
+        final int c1 = cards[0].getValue();
+        final int c2 = cards[1].getValue();
+        final int c3 = cards[2].getValue();
+        final int c4 = cards[3].getValue();
+        final int c5 = cards[4].getValue();
+        if (hasDuplicates(new int[]{c1, c2, c3, c4, c5})) {
+            throw new IllegalArgumentException("Illegal hand.");
+        }
+
+        this.cards = cards;
+    }
+
+    /**
+     * Evaluates the current hand and returns its value as an integer.
+     * Based on Kevin Suffecool's 5-card hand evaluator and with Paul Senzee's pre-computed hash.
+     * @return the value of the hand as an integer between 1 and 7462 (the lower the value, the more valuable the hand)
+     */
+    public int evaluate() {
         // Binary representations of each card
         final int c1 = cards[0].getValue();
         final int c2 = cards[1].getValue();
@@ -52,6 +64,20 @@ public abstract class Hand {
         // Remaining cards
         final int product = (c1 & 0xFF) * (c2 & 0xFF) * (c3 & 0xFF) * (c4 & 0xFF) * (c5 & 0xFF);
         return Tables.Hash.Values.TABLE[hash(product)];
+    }
+
+    /**
+     * Evaluates the given hand and returns its value as an integer.
+     * Based on Kevin Suffecool's 5-card hand evaluator and with Paul Senzee's pre-computed hash.
+     * @param cards a hand of cards to evaluate
+     * @return the value of the hand as an integer between 1 and 7462 (the lower the value, the more valuable the hand)
+     * @throws IllegalArgumentException if cards is null or does not contain exactly 5 cards
+     * @deprecated Use {@link #evaluate()} instead.
+     */
+    @Deprecated
+    public static int evaluate(Card[] cards) {
+        var hand = new Hand(cards);
+        return hand.evaluate();
     }
 
     /**

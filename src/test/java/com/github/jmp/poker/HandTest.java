@@ -10,10 +10,70 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class HandTest {
+    @Test
+    void testTooFewCards() {
+        assertThrows(IllegalArgumentException.class, () ->
+            new Hand(
+                new Card(Card.KING, Card.HEARTS),
+                new Card(Card.QUEEN, Card.CLUBS),
+                new Card(Card.JACK, Card.DIAMONDS),
+                new Card(Card.TEN, Card.SPADES)
+            )
+        );
+    }
+
+    @Test
+    void testTooManyCards() {
+        assertThrows(IllegalArgumentException.class, () ->
+            new Hand(
+                new Card(Card.KING, Card.HEARTS),
+                new Card(Card.QUEEN, Card.CLUBS),
+                new Card(Card.JACK, Card.DIAMONDS),
+                new Card(Card.TEN, Card.SPADES),
+                new Card(Card.ACE, Card.HEARTS),
+                new Card(Card.EIGHT, Card.CLUBS)
+            )
+        );
+    }
+
+    @Test
+    void testNull() {
+        assertThrows(IllegalArgumentException.class, () ->
+            new Hand((Card[]) null)
+        );
+    }
+
+    @Test
+    void testLegal() {
+        assertDoesNotThrow(() ->
+            new Hand(
+                new Card(Card.KING, Card.CLUBS),
+                new Card(Card.QUEEN, Card.CLUBS),
+                new Card(Card.JACK, Card.CLUBS),
+                new Card(Card.TEN, Card.CLUBS),
+                new Card(Card.ACE, Card.CLUBS)
+            )
+        );
+    }
+
+    @Test
+    void testIllegal() {
+        assertThrows(IllegalArgumentException.class, () ->
+            new Hand(
+                new Card(Card.KING, Card.HEARTS),
+                new Card(Card.KING, Card.HEARTS),
+                new Card(Card.JACK, Card.DIAMONDS),
+                new Card(Card.TEN, Card.SPADES),
+                new Card(Card.ACE, Card.HEARTS)
+            )
+        );
+    }
+
     @Test
     void testEvaluateTooFewCards() {
         assertThrows(IllegalArgumentException.class, () ->
