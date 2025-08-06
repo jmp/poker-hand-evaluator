@@ -49,6 +49,19 @@ public class Card {
     }
 
     /**
+     * Creates a new card with the given rank and suit.
+     * @param rank the rank of the card, e.g. {@link Card#SIX}
+     * @param suit the suit of the card, see {@link Suit}
+     */
+    public Card(int rank, Suit suit) {
+        if (!isValidRank(rank)) {
+            throw new IllegalArgumentException("Invalid rank.");
+        }
+
+        value = (1 << (rank + 16)) | suit.getValue() | (rank << 8) | Tables.PRIMES[rank];
+    }
+
+    /**
      * Create a new {@link Card} instance from the given string.
      * The string should be a two-character string where the first character
      * is the rank and the second character is the suit. For example, "Kc" means
