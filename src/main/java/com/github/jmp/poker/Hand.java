@@ -2,17 +2,17 @@ package com.github.jmp.poker;
 
 import java.util.Arrays;
 
-/** Utility methods for evaluating or creating a hand of cards. */
-public class Hand {
-    private final Card[] cards;
-
+/**
+ * Utility methods for evaluating or creating a hand of cards.
+ */
+public record Hand(Card... cards) {
     /**
      * Constructs a new Hand with exactly 5 cards.
      *
      * @param cards the cards to include in this hand (must be exactly 5 cards)
      * @throws IllegalArgumentException if cards is null or does not contain exactly 5 cards
      */
-    Hand(Card ...cards) {
+    public Hand {
         if (cards == null || cards.length != 5) {
             throw new IllegalArgumentException("Exactly 5 cards are required.");
         }
@@ -25,13 +25,12 @@ public class Hand {
         if (hasDuplicates(new int[]{c1, c2, c3, c4, c5})) {
             throw new IllegalArgumentException("Illegal hand.");
         }
-
-        this.cards = cards;
     }
 
     /**
      * Evaluates the current hand and returns its value as an integer.
      * Based on Kevin Suffecool's 5-card hand evaluator and with Paul Senzee's pre-computed hash.
+     *
      * @return the value of the hand as an integer between 1 and 7462 (the lower the value, the more valuable the hand)
      */
     public int evaluate() {
@@ -68,26 +67,27 @@ public class Hand {
 
     /**
      * Creates a new 5-card hand from the given string.
+     *
      * @param string the string to create the hand from, such as "Kd 5s Jc Ah Qc"
-     * @return a new hand as an array of cards
+     * @return a new hand
+     * @throws IllegalArgumentException if the string does not contain exactly 5 cards
      * @see Card
      */
-    public static Card[] fromString(String string) {
-        final String[] parts = string.split(" ");
-        final Card[] cards = new Card[parts.length];
+    public static Hand fromString(String string) {
+        final var parts = string.split(" ");
+        final var cards = new Card[parts.length];
 
-        if (parts.length != 5)
-            throw new IllegalArgumentException("Exactly 5 cards are required.");
-
-        int index = 0;
-        for (String part : parts)
+        var index = 0;
+        for (var part : parts) {
             cards[index++] = Card.fromString(part);
+        }
 
-        return cards;
+        return new Hand(cards);
     }
 
     /**
      * Converts the given hand into concatenation of their string representations
+     *
      * @param cards a hand of cards
      * @return a concatenation of the string representations of the given cards
      */
@@ -105,6 +105,7 @@ public class Hand {
 
     /**
      * Checks if the given array of values has any duplicates.
+     *
      * @param values the values to check
      * @return true if the values contain duplicates, false otherwise
      */

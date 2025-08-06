@@ -124,11 +124,11 @@ class HandTest {
                 var cardsString = line.substring(0, line.lastIndexOf(" "));
                 var valueString = line.substring(line.lastIndexOf(" ") + 1);
 
-                var cards = Hand.fromString(cardsString);
+                var hand = Hand.fromString(cardsString);
                 var expectedValue = Integer.parseInt(valueString);
-                var evaluatedValue = new Hand(cards).evaluate();
+                var evaluatedValue = hand.evaluate();
 
-                assertEquals(expectedValue, evaluatedValue, "Evaluation of hand '" + Hand.toString(cards) + "' (parsed from '" + cardsString + "') failed.");
+                assertEquals(expectedValue, evaluatedValue);
                 ++count;
             }
         }
@@ -153,7 +153,7 @@ class HandTest {
 
     @Test
     void testValidFromString() {
-        final var cards = Hand.fromString("Kd 5s Jc Ah Qc");
+        final var cards = Hand.fromString("Kd 5s Jc Ah Qc").cards();
 
         final var kingOfDiamonds = cards[0];
         final var fiveOfSpades = cards[1];
