@@ -2,11 +2,9 @@ package com.github.jmp.poker;
 
 import org.junit.jupiter.api.Test;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
 
@@ -75,107 +73,67 @@ class HandTest {
     }
 
     @Test
-    void testEvaluateTooFewCards() {
-        assertThrows(IllegalArgumentException.class, () ->
-            Hand.evaluate(new Card[]{
-                new Card(Card.KING, Card.HEARTS),
-                new Card(Card.QUEEN, Card.CLUBS),
-                new Card(Card.JACK, Card.DIAMONDS),
-                new Card(Card.TEN, Card.SPADES),
-            })
-        );
-    }
-
-    @Test
-    void testEvaluateTooManyCards() {
-        assertThrows(IllegalArgumentException.class, () ->
-            Hand.evaluate(new Card[]{
-                new Card(Card.KING, Card.HEARTS),
-                new Card(Card.QUEEN, Card.CLUBS),
-                new Card(Card.JACK, Card.DIAMONDS),
-                new Card(Card.TEN, Card.SPADES),
-                new Card(Card.ACE, Card.HEARTS),
-                new Card(Card.EIGHT, Card.CLUBS),
-            })
-        );
-    }
-
-    @Test
-    void testEvaluateIllegalHand() {
-        assertThrows(IllegalArgumentException.class, () ->
-            Hand.evaluate(new Card[]{
-                new Card(Card.KING, Card.HEARTS),
-                new Card(Card.KING, Card.HEARTS),
-                new Card(Card.JACK, Card.DIAMONDS),
-                new Card(Card.TEN, Card.SPADES),
-                new Card(Card.ACE, Card.HEARTS),
-            })
-        );
-    }
-
-    @Test
     void testEvaluateRoyalFlush() {
-        final int[] suits = {
-            Card.CLUBS,
-            Card.DIAMONDS,
-            Card.HEARTS,
-            Card.SPADES,
-        };
-        for (int suit : suits) {
-            assertEquals(1, Hand.evaluate(new Card[]{
+        final var suits = new int[]{Card.CLUBS, Card.DIAMONDS, Card.HEARTS, Card.SPADES};
+        for (var suit : suits) {
+            var hand = new Hand(
                 new Card(Card.KING, suit),
                 new Card(Card.QUEEN, suit),
                 new Card(Card.JACK, suit),
                 new Card(Card.TEN, suit),
-                new Card(Card.ACE, suit),
-            }));
+                new Card(Card.ACE, suit)
+            );
+            assertEquals(1, hand.evaluate());
         }
     }
 
     @Test
     void testEvaluateSevenHigh() {
-        assertEquals(7462, Hand.evaluate(new Card[]{
+        var hand = new Hand(
             new Card(Card.SEVEN, Card.HEARTS),
             new Card(Card.FIVE, Card.CLUBS),
             new Card(Card.FOUR, Card.DIAMONDS),
             new Card(Card.TREY, Card.SPADES),
-            new Card(Card.DEUCE, Card.HEARTS),
-        }));
+            new Card(Card.DEUCE, Card.HEARTS)
+        );
+        assertEquals(7462, hand.evaluate());
     }
 
     @Test
     void testEvaluatePair() {
-        assertEquals(6185, Hand.evaluate(new Card[]{
+        var hand = new Hand(
             new Card(Card.DEUCE, Card.HEARTS),
             new Card(Card.DEUCE, Card.DIAMONDS),
             new Card(Card.TREY, Card.CLUBS),
             new Card(Card.FOUR, Card.CLUBS),
-            new Card(Card.FIVE, Card.CLUBS),
-        }));
+            new Card(Card.FIVE, Card.CLUBS)
+        );
+
+        assertEquals(6185, hand.evaluate());
     }
 
     @Test
     void testEvaluateAllHands() throws IOException, URISyntaxException {
-        final int expectedHandCount = 2598960;
+        final var expectedHandCount = 2598960;
 
-        int count = 0;
-        Path path = Paths.get(Objects.requireNonNull(getClass().getClassLoader().getResource("HandTestValues.txt")).toURI());
-        try (BufferedReader reader = Files.newBufferedReader(path)) {
+        var count = 0;
+        var path = Paths.get(Objects.requireNonNull(getClass().getClassLoader().getResource("HandTestValues.txt")).toURI());
+        try (var reader = Files.newBufferedReader(path)) {
             String line;
             while ((line = reader.readLine()) != null) {
-                String cardsString = line.substring(0, line.lastIndexOf(" "));
-                String valueString = line.substring(line.lastIndexOf(" ") + 1);
+                var cardsString = line.substring(0, line.lastIndexOf(" "));
+                var valueString = line.substring(line.lastIndexOf(" ") + 1);
 
-                Card[] cards = Hand.fromString(cardsString);
-                int expectedValue = Integer.parseInt(valueString);
-                int evaluatedValue = Hand.evaluate(cards);
+                var cards = Hand.fromString(cardsString);
+                var expectedValue = Integer.parseInt(valueString);
+                var evaluatedValue = new Hand(cards).evaluate();
 
                 assertEquals(expectedValue, evaluatedValue, "Evaluation of hand '" + Hand.toString(cards) + "' (parsed from '" + cardsString + "') failed.");
                 ++count;
             }
         }
 
-        assertEquals(count, expectedHandCount);
+        assertEquals(expectedHandCount, count);
     }
 
     @Test
@@ -195,13 +153,13 @@ class HandTest {
 
     @Test
     void testValidFromString() {
-        final Card[] cards = Hand.fromString("Kd 5s Jc Ah Qc");
+        final var cards = Hand.fromString("Kd 5s Jc Ah Qc");
 
-        final Card kingOfDiamonds = cards[0];
-        final Card fiveOfSpades = cards[1];
-        final Card jackOfClubs = cards[2];
-        final Card aceOfHearts = cards[3];
-        final Card queenOfClubs = cards[4];
+        final var kingOfDiamonds = cards[0];
+        final var fiveOfSpades = cards[1];
+        final var jackOfClubs = cards[2];
+        final var aceOfHearts = cards[3];
+        final var queenOfClubs = cards[4];
 
         assertEquals(Card.KING, kingOfDiamonds.getRank());
         assertEquals(Card.DIAMONDS, kingOfDiamonds.getSuit());

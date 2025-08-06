@@ -67,20 +67,6 @@ public class Hand {
     }
 
     /**
-     * Evaluates the given hand and returns its value as an integer.
-     * Based on Kevin Suffecool's 5-card hand evaluator and with Paul Senzee's pre-computed hash.
-     * @param cards a hand of cards to evaluate
-     * @return the value of the hand as an integer between 1 and 7462 (the lower the value, the more valuable the hand)
-     * @throws IllegalArgumentException if cards is null or does not contain exactly 5 cards
-     * @deprecated Use {@link #evaluate()} instead.
-     */
-    @Deprecated
-    public static int evaluate(Card[] cards) {
-        var hand = new Hand(cards);
-        return hand.evaluate();
-    }
-
-    /**
      * Creates a new 5-card hand from the given string.
      * @param string the string to create the hand from, such as "Kd 5s Jc Ah Qc"
      * @return a new hand as an array of cards

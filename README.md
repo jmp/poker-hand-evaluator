@@ -30,29 +30,25 @@ A card can also be constructed from a string:
 Card kingOfClubs = new Card("Kc");
 ```
 
-Hands are arrays of cards:
-
-```java
-// A hand containing five cards
-Card[] hand = {
-    new Card(Card.KING, Card.CLUBS),
-    new Card(Card.QUEEN, Card.HEARTS),
-    new Card(Card.JACK, Card.DIAMONDS),
-    new Card(Card.TEN, Card.SPADES),
-    new Card(Card.NINE, Card.CLUBS),
-};
-```
-
 ## `Hand` class
 
-The `Hand` class is an abstract class containing only static methods.
-
-To evaluate a hand, use the `evaluate` method which takes an array
-of cards as its only argument:
+The `Hand` is a collection of five cards:
 
 ```java
-// Evaluate a hand
-int value = Hand.evaluate(hand);
+// Create a royal flush
+var hand = new Hand(
+    new Card(Card.KING, Card.CLUBS),
+    new Card(Card.QUEEN, Card.CLUBS),
+    new Card(Card.JACK, Card.CLUBS),
+    new Card(Card.TEN, Card.CLUBS),
+    new Card(Card.ACE, Card.CLUBS)
+);
+```
+
+To evaluate a hand, use the `evaluate` method:
+
+```java
+int value = hand.evaluate();
 ```
 
 The `evaluate` method returns the value of a hand as an integer
