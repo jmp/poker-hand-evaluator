@@ -33,32 +33,11 @@ public class Card {
 
     /**
      * Creates a new card with the given rank and suit.
-     * @param rank the rank of the card, e.g. {@link Card#SIX}
-     * @param suit the suit of the card, e.g. {@link Card#CLUBS}
-     */
-    public Card(int rank, int suit) {
-        if (!isValidRank(rank)) {
-            throw new IllegalArgumentException("Invalid rank.");
-        }
-
-        if (!isValidSuit(suit)) {
-            throw new IllegalArgumentException("Invalid suit.");
-        }
-
-        value = (1 << (rank + 16)) | suit | (rank << 8) | Tables.PRIMES[rank];
-    }
-
-    /**
-     * Creates a new card with the given rank and suit.
-     * @param rank the rank of the card, e.g. {@link Card#SIX}
+     * @param rank the rank of the card, see {@link Rank}
      * @param suit the suit of the card, see {@link Suit}
      */
-    public Card(int rank, Suit suit) {
-        if (!isValidRank(rank)) {
-            throw new IllegalArgumentException("Invalid rank.");
-        }
-
-        value = (1 << (rank + 16)) | suit.getValue() | (rank << 8) | Tables.PRIMES[rank];
+    public Card(Rank rank, Suit suit) {
+        value = (1 << (rank.getValue() + 16)) | suit.getValue() | (rank.getValue() << 8) | Tables.PRIMES[rank.getValue()];
     }
 
     /**
@@ -77,7 +56,7 @@ public class Card {
         final int rank = RANKS.indexOf(string.charAt(0));
         final int suit = SPADES << SUITS.indexOf(string.charAt(1));
 
-        return new Card(rank, suit);
+        return new Card(Rank.fromValue(rank), Suit.fromValue(suit));
     }
 
     /**

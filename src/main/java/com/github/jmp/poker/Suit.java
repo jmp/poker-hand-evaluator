@@ -26,4 +26,14 @@ public enum Suit {
     public char getSymbol() {
         return symbol;
     }
+
+    static Suit fromValue(int value) {
+        return switch (value) {
+            case 0x8000 -> CLUBS;
+            case 0x4000 -> DIAMONDS;
+            case 0x2000 -> HEARTS;
+            case 0x1000 -> SPADES;
+            default -> throw new IllegalArgumentException("Invalid value: " + value);
+        };
+    }
 }

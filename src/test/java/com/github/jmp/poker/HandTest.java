@@ -17,10 +17,10 @@ class HandTest {
     void testTooFewCards() {
         assertThrows(IllegalArgumentException.class, () ->
             new Hand(
-                new Card(Card.KING, Card.HEARTS),
-                new Card(Card.QUEEN, Card.CLUBS),
-                new Card(Card.JACK, Card.DIAMONDS),
-                new Card(Card.TEN, Card.SPADES)
+                new Card(Rank.KING, Suit.HEARTS),
+                new Card(Rank.QUEEN, Suit.CLUBS),
+                new Card(Rank.JACK, Suit.DIAMONDS),
+                new Card(Rank.TEN, Suit.SPADES)
             )
         );
     }
@@ -29,12 +29,12 @@ class HandTest {
     void testTooManyCards() {
         assertThrows(IllegalArgumentException.class, () ->
             new Hand(
-                new Card(Card.KING, Card.HEARTS),
-                new Card(Card.QUEEN, Card.CLUBS),
-                new Card(Card.JACK, Card.DIAMONDS),
-                new Card(Card.TEN, Card.SPADES),
-                new Card(Card.ACE, Card.HEARTS),
-                new Card(Card.EIGHT, Card.CLUBS)
+                new Card(Rank.KING, Suit.HEARTS),
+                new Card(Rank.QUEEN, Suit.CLUBS),
+                new Card(Rank.JACK, Suit.DIAMONDS),
+                new Card(Rank.TEN, Suit.SPADES),
+                new Card(Rank.ACE, Suit.HEARTS),
+                new Card(Rank.EIGHT, Suit.CLUBS)
             )
         );
     }
@@ -50,11 +50,11 @@ class HandTest {
     void testLegal() {
         assertDoesNotThrow(() ->
             new Hand(
-                new Card(Card.KING, Card.CLUBS),
-                new Card(Card.QUEEN, Card.CLUBS),
-                new Card(Card.JACK, Card.CLUBS),
-                new Card(Card.TEN, Card.CLUBS),
-                new Card(Card.ACE, Card.CLUBS)
+                new Card(Rank.KING, Suit.CLUBS),
+                new Card(Rank.QUEEN, Suit.CLUBS),
+                new Card(Rank.JACK, Suit.CLUBS),
+                new Card(Rank.TEN, Suit.CLUBS),
+                new Card(Rank.ACE, Suit.CLUBS)
             )
         );
     }
@@ -63,25 +63,24 @@ class HandTest {
     void testIllegal() {
         assertThrows(IllegalArgumentException.class, () ->
             new Hand(
-                new Card(Card.KING, Card.HEARTS),
-                new Card(Card.KING, Card.HEARTS),
-                new Card(Card.JACK, Card.DIAMONDS),
-                new Card(Card.TEN, Card.SPADES),
-                new Card(Card.ACE, Card.HEARTS)
+                new Card(Rank.KING, Suit.HEARTS),
+                new Card(Rank.KING, Suit.HEARTS),
+                new Card(Rank.JACK, Suit.DIAMONDS),
+                new Card(Rank.TEN, Suit.SPADES),
+                new Card(Rank.ACE, Suit.HEARTS)
             )
         );
     }
 
     @Test
     void testEvaluateRoyalFlush() {
-        final var suits = new int[]{Card.CLUBS, Card.DIAMONDS, Card.HEARTS, Card.SPADES};
-        for (var suit : suits) {
+        for (var suit : Suit.values()) {
             var hand = new Hand(
-                new Card(Card.KING, suit),
-                new Card(Card.QUEEN, suit),
-                new Card(Card.JACK, suit),
-                new Card(Card.TEN, suit),
-                new Card(Card.ACE, suit)
+                new Card(Rank.KING, suit),
+                new Card(Rank.QUEEN, suit),
+                new Card(Rank.JACK, suit),
+                new Card(Rank.TEN, suit),
+                new Card(Rank.ACE, suit)
             );
             assertEquals(1, hand.evaluate());
         }
@@ -90,11 +89,11 @@ class HandTest {
     @Test
     void testEvaluateSevenHigh() {
         var hand = new Hand(
-            new Card(Card.SEVEN, Card.HEARTS),
-            new Card(Card.FIVE, Card.CLUBS),
-            new Card(Card.FOUR, Card.DIAMONDS),
-            new Card(Card.TREY, Card.SPADES),
-            new Card(Card.DEUCE, Card.HEARTS)
+            new Card(Rank.SEVEN, Suit.HEARTS),
+            new Card(Rank.FIVE, Suit.CLUBS),
+            new Card(Rank.FOUR, Suit.DIAMONDS),
+            new Card(Rank.THREE, Suit.SPADES),
+            new Card(Rank.TWO, Suit.HEARTS)
         );
         assertEquals(7462, hand.evaluate());
     }
@@ -102,11 +101,11 @@ class HandTest {
     @Test
     void testEvaluatePair() {
         var hand = new Hand(
-            new Card(Card.DEUCE, Card.HEARTS),
-            new Card(Card.DEUCE, Card.DIAMONDS),
-            new Card(Card.TREY, Card.CLUBS),
-            new Card(Card.FOUR, Card.CLUBS),
-            new Card(Card.FIVE, Card.CLUBS)
+            new Card(Rank.TWO, Suit.HEARTS),
+            new Card(Rank.TWO, Suit.DIAMONDS),
+            new Card(Rank.THREE, Suit.CLUBS),
+            new Card(Rank.FOUR, Suit.CLUBS),
+            new Card(Rank.FIVE, Suit.CLUBS)
         );
 
         assertEquals(6185, hand.evaluate());
@@ -180,11 +179,11 @@ class HandTest {
     @Test
     void testToString() {
         var hand = new Hand(
-            new Card(Card.KING, Card.DIAMONDS),
-            new Card(Card.FIVE, Card.SPADES),
-            new Card(Card.JACK, Card.CLUBS),
-            new Card(Card.ACE, Card.HEARTS),
-            new Card(Card.QUEEN, Card.CLUBS)
+            new Card(Rank.KING, Suit.DIAMONDS),
+            new Card(Rank.FIVE, Suit.SPADES),
+            new Card(Rank.JACK, Suit.CLUBS),
+            new Card(Rank.ACE, Suit.HEARTS),
+            new Card(Rank.QUEEN, Suit.CLUBS)
         );
 
         assertEquals("Kd 5s Jc Ah Qc", hand.toString());
