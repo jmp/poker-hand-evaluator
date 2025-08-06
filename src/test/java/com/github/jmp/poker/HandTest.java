@@ -179,12 +179,14 @@ class HandTest {
 
     @Test
     void testToString() {
-        assertEquals("Kd 5s Jc Ah Qc", Hand.toString(new Card[]{
+        var hand = new Hand(
             new Card(Card.KING, Card.DIAMONDS),
             new Card(Card.FIVE, Card.SPADES),
             new Card(Card.JACK, Card.CLUBS),
             new Card(Card.ACE, Card.HEARTS),
-            new Card(Card.QUEEN, Card.CLUBS),
-        }));
+            new Card(Card.QUEEN, Card.CLUBS)
+        );
+
+        assertEquals("Kd 5s Jc Ah Qc", hand.toString());
     }
 }

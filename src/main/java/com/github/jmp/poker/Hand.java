@@ -86,18 +86,18 @@ public record Hand(Card... cards) {
     }
 
     /**
-     * Converts the given hand into concatenation of their string representations
+     * Converts the hand into a concatenation of the string representations of its cards
      *
-     * @param cards a hand of cards
-     * @return a concatenation of the string representations of the given cards
+     * @return a concatenation of the string representations of the cards
      */
-    public static String toString(Card[] cards) {
+    public String toString() {
         final StringBuilder builder = new StringBuilder();
 
-        for (int i = 0; i < cards.length; i++) {
+        for (var i = 0; i < cards.length; i++) {
             builder.append(cards[i]);
-            if (i < cards.length - 1)
+            if (i < cards.length - 1) {
                 builder.append(" ");
+            }
         }
 
         return builder.toString();
