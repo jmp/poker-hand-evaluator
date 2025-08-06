@@ -58,7 +58,7 @@ The `fromString` method can be used to create a hand from a string:
 
 ```java
 // Create a hand from a string
-Card[] hand = Hand.fromString("Kd 5s Jc Ah Qc");
+Hand hand = Hand.fromString("Kd 5s Jc Ah Qc");
 ```
 
 ## Credits
