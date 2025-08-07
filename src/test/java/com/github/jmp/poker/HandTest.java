@@ -160,20 +160,20 @@ class HandTest {
         final var aceOfHearts = cards[3];
         final var queenOfClubs = cards[4];
 
-        assertEquals(Card.KING, kingOfDiamonds.getRank());
-        assertEquals(Card.DIAMONDS, kingOfDiamonds.getSuit());
+        assertEquals(Rank.KING, kingOfDiamonds.getRank());
+        assertEquals(Suit.DIAMONDS, kingOfDiamonds.getSuit());
 
-        assertEquals(Card.FIVE, fiveOfSpades.getRank());
-        assertEquals(Card.SPADES, fiveOfSpades.getSuit());
+        assertEquals(Rank.FIVE, fiveOfSpades.getRank());
+        assertEquals(Suit.SPADES, fiveOfSpades.getSuit());
 
-        assertEquals(Card.JACK, jackOfClubs.getRank());
-        assertEquals(Card.CLUBS, jackOfClubs.getSuit());
+        assertEquals(Rank.JACK, jackOfClubs.getRank());
+        assertEquals(Suit.CLUBS, jackOfClubs.getSuit());
 
-        assertEquals(Card.ACE, aceOfHearts.getRank());
-        assertEquals(Card.HEARTS, aceOfHearts.getSuit());
+        assertEquals(Rank.ACE, aceOfHearts.getRank());
+        assertEquals(Suit.HEARTS, aceOfHearts.getSuit());
 
-        assertEquals(Card.QUEEN, queenOfClubs.getRank());
-        assertEquals(Card.CLUBS, queenOfClubs.getSuit());
+        assertEquals(Rank.QUEEN, queenOfClubs.getRank());
+        assertEquals(Suit.CLUBS, queenOfClubs.getSuit());
     }
 
     @Test

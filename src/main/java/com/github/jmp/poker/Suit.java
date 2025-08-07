@@ -6,25 +6,21 @@ package com.github.jmp.poker;
  * and a single character symbol for display purposes.
  */
 public enum Suit {
-    CLUBS(0x8000, 'c'),
-    DIAMONDS(0x4000, 'd'),
-    HEARTS(0x2000, 'h'),
-    SPADES(0x1000, 's');
+    CLUBS(0x8000, "c"),
+    DIAMONDS(0x4000, "d"),
+    HEARTS(0x2000, "h"),
+    SPADES(0x1000, "s");
 
     private final int value;
-    private final char symbol;
+    private final String symbol;
 
-    Suit(int value, char symbol) {
+    Suit(int value, String symbol) {
         this.value = value;
         this.symbol = symbol;
     }
 
     public int getValue() {
         return value;
-    }
-
-    public char getSymbol() {
-        return symbol;
     }
 
     static Suit fromValue(int value) {
@@ -35,5 +31,10 @@ public enum Suit {
             case 0x1000 -> SPADES;
             default -> throw new IllegalArgumentException("Invalid value: " + value);
         };
+    }
+
+    @Override
+    public String toString() {
+        return symbol;
     }
 }

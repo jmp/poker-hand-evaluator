@@ -20,7 +20,7 @@ The `Card` class self-explanatory:
 
 ```java
 // Create a king of clubs
-Card kingOfClubs = new Card(Card.KING, Card.CLUBS);
+Card kingOfClubs = new Card(Rank.KING, Suit.CLUBS);
 ```
 
 A card can also be constructed from a string:
@@ -37,11 +37,11 @@ The `Hand` is a collection of five cards:
 ```java
 // Create a royal flush
 var hand = new Hand(
-    new Card(Card.KING, Card.CLUBS),
-    new Card(Card.QUEEN, Card.CLUBS),
-    new Card(Card.JACK, Card.CLUBS),
-    new Card(Card.TEN, Card.CLUBS),
-    new Card(Card.ACE, Card.CLUBS)
+    new Card(Rank.KING, Suit.CLUBS),
+    new Card(Rank.QUEEN, Suit.CLUBS),
+    new Card(Rank.JACK, Suit.CLUBS),
+    new Card(Rank.TEN, Suit.CLUBS),
+    new Card(Rank.ACE, Suit.CLUBS)
 );
 ```
 

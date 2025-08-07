@@ -13,19 +13,19 @@ class CardTest {
 
     @Test
     void testGetRank() {
-        assertEquals(Card.KING, new Card(Rank.KING, Suit.DIAMONDS).getRank());
-        assertEquals(Card.FIVE, new Card(Rank.FIVE, Suit.SPADES).getRank());
-        assertEquals(Card.JACK, new Card(Rank.JACK, Suit.CLUBS).getRank());
-        assertEquals(Card.SIX, new Card(Rank.SIX, Suit.HEARTS).getRank());
-        assertEquals(Card.NINE, new Card(Rank.NINE, Suit.DIAMONDS).getRank());
+        assertEquals(Rank.KING, new Card(Rank.KING, Suit.DIAMONDS).getRank());
+        assertEquals(Rank.FIVE, new Card(Rank.FIVE, Suit.SPADES).getRank());
+        assertEquals(Rank.JACK, new Card(Rank.JACK, Suit.CLUBS).getRank());
+        assertEquals(Rank.SIX, new Card(Rank.SIX, Suit.HEARTS).getRank());
+        assertEquals(Rank.NINE, new Card(Rank.NINE, Suit.DIAMONDS).getRank());
     }
 
     @Test
     void testGetSuit() {
-        assertEquals(Card.DIAMONDS, new Card(Rank.KING, Suit.DIAMONDS).getSuit());
-        assertEquals(Card.SPADES, new Card(Rank.FIVE, Suit.SPADES).getSuit());
-        assertEquals(Card.CLUBS, new Card(Rank.JACK, Suit.CLUBS).getSuit());
-        assertEquals(Card.HEARTS, new Card(Rank.SIX, Suit.HEARTS).getSuit());
+        assertEquals(Suit.DIAMONDS, new Card(Rank.KING, Suit.DIAMONDS).getSuit());
+        assertEquals(Suit.SPADES, new Card(Rank.FIVE, Suit.SPADES).getSuit());
+        assertEquals(Suit.CLUBS, new Card(Rank.JACK, Suit.CLUBS).getSuit());
+        assertEquals(Suit.HEARTS, new Card(Rank.SIX, Suit.HEARTS).getSuit());
     }
 
     @Test
@@ -38,16 +38,16 @@ class CardTest {
     @Test
     void testFromString() {
         final Card kingOfDiamonds = Card.fromString("Kd");
-        assertEquals(Card.KING, kingOfDiamonds.getRank());
-        assertEquals(Card.DIAMONDS, kingOfDiamonds.getSuit());
+        assertEquals(Rank.KING, kingOfDiamonds.getRank());
+        assertEquals(Suit.DIAMONDS, kingOfDiamonds.getSuit());
 
         final Card fiveOfSpades = Card.fromString("5s");
-        assertEquals(Card.FIVE, fiveOfSpades.getRank());
-        assertEquals(Card.SPADES, fiveOfSpades.getSuit());
+        assertEquals(Rank.FIVE, fiveOfSpades.getRank());
+        assertEquals(Suit.SPADES, fiveOfSpades.getSuit());
 
         final Card jackOfClubs = Card.fromString("Jc");
-        assertEquals(Card.JACK, jackOfClubs.getRank());
-        assertEquals(Card.CLUBS, jackOfClubs.getSuit());
+        assertEquals(Rank.JACK, jackOfClubs.getRank());
+        assertEquals(Suit.CLUBS, jackOfClubs.getSuit());
     }
 
     @Test
