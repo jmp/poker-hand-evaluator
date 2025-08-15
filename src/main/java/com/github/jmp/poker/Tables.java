@@ -1,7 +1,7 @@
 package com.github.jmp.poker;
 
 /** Lookup tables for making calculations faster. */
-public class Tables {
+class Tables {
     private static final int CARDS_IN_DECK = 52;
     private static final int HAND_COMBINATIONS = 2598960;
     public static final byte[] PRIMES = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41};
