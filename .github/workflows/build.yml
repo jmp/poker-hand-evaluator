@@ -14,7 +14,7 @@ jobs:
       - run: mvn javadoc:javadoc
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: apidocs
+          path: target/reports/apidocs
   javadoc:
     environment:
       name: github-pages
