@@ -12,11 +12,9 @@ jobs:
           cache: maven
       - run: mvn --batch-mode --update-snapshots verify
       - run: mvn javadoc:javadoc
-      - name: Upload static files as artifact
-        id: javadoc
-        uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v3
         with:
-          path: target/site/apidocs
+          path: apidocs
   javadoc:
     environment:
       name: github-pages
